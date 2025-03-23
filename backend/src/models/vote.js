@@ -1,17 +1,20 @@
 const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-module.exports = (sequelize) => {
-  const Vote = sequelize.define('Vote', {
-    transactionHash: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    timestamp: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW
+const Vote = sequelize.define('Vote', {
+  transactionHash: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  }
+}, {
+  timestamps: true,
+  indexes: [
+    {
+      unique: true,
+      fields: ['userId', 'electionId']
     }
-  });
+  ]
+});
 
-  return Vote;
-}; 
+module.exports = Vote; 

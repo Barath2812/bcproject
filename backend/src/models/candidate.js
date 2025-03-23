@@ -1,19 +1,21 @@
 const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-module.exports = (sequelize) => {
-  const Candidate = sequelize.define('Candidate', {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.TEXT
-    },
-    blockchainIndex: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    }
-  });
+const Candidate = sequelize.define('Candidate', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  imageUrl: {
+    type: DataTypes.STRING,
+    allowNull: true
+  }
+}, {
+  timestamps: true
+});
 
-  return Candidate;
-};
+module.exports = Candidate;
